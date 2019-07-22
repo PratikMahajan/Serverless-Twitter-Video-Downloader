@@ -41,7 +41,7 @@ oc label namespace $namespace knative-eventing-injection=enabled --overwrite
 
 
 header_text "Starting Production deployment on OpenShift!"
-for filename in deploy/templates/*.yaml; do
+for filename in deploy/*.yaml; do
     header_text "Applying configuration $filename on $namespace"
     kubectl -n $namespace apply -f $filename
 done
