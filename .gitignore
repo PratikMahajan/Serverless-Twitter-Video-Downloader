@@ -1,4 +1,4 @@
 *.log
 .idea
-secret*
-!secret.yaml.example
+*Secret*
+!*Secret.yaml.example
