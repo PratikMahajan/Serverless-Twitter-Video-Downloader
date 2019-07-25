@@ -34,3 +34,19 @@ Check `Serving-Secret.yaml.example` file in `deploy/` for reference
 
 
 
+## Deploy
+
+### Makefile deploy
+
+1. Make sure you're logged in to your Kubernetes Cluster on your Terminal 
+2. Install Knative on the cluster \
+   See [Installing Knative](https://knative.dev/v0.4-docs/install/)
+3. Edit namespace in `Makefile`  
+4. Use command  `make deploy`  on your Terminal to deploy the app to your cluster
+
+### Manual deploy 
+1. Make sure you're logged in to your Kubernetes Cluster on your Terminal 
+2. Install Knative on the cluster \
+   See [Installing Knative](https://knative.dev/v0.4-docs/install/)
+3. Add label `knative-eventing-injection=enabled` to your namespace
+4. Apply all `yaml` configurations in `deploy/` 
