@@ -4,7 +4,7 @@
 NAMESPACE ?= knbot
 
 check-message:
-	@if [ -z "${m}" ]; then echo "Type must be set, use 'make git y=apply or delete'"; exit 1; fi
+	@if [ -z "${m}" ]; then echo "Type must be set, use 'make git m=apply or delete'"; exit 1; fi
 
 deploy: check-message deploy-app
 
