@@ -24,6 +24,11 @@ case $key in
     shift # past argument
     shift # past value
     ;;
+    -t|--type)
+    install="$2"
+    shift
+    shift
+    ;;
 esac
 done
 
@@ -36,15 +41,24 @@ function header_text {
 echo "Using namespace/Project $namespace"
 oc project $namespace
 
-echo "Setting Label for $namespace"
-oc label namespace $namespace knative-eventing-injection=enabled --overwrite
+if [ "$install" == "apply" ]; then
+    echo "Setting Label for $namespace"
+    oc label namespace $namespace knative-eventing-injection=enabled --overwrite
 
 
-header_text "Starting Production deployment on OpenShift!"
-for filename in deploy/*.yaml; do
-    header_text "Applying configuration $filename on $namespace"
-    kubectl -n $namespace apply -f $filename
-done
+    header_text "Starting Production deployment on OpenShift!"
+    for filename in deploy/*.yaml; do
+        header_text "Applying configuration $filename on $namespace"
+        kubectl -n $namespace apply -f $filename
+    done
+fi
 
+if [ "$install" == "delete" ]; then
+    header_text "Deleting Production deployment on OpenShift!"
+    for filename in deploy/*.yaml; do
+        header_text "Deleting configuration $filename on $namespace"
+        kubectl -n $namespace delete -f $filename
+    done
+fi
 
 header_text "All Configurations applied on $namespace"
